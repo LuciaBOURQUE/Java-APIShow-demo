@@ -1,9 +1,9 @@
-package show_crud.api;
+package show_crud.controllers;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import show_crud.dao.TicketsDAO;
+import show_crud.services.TicketsDAO;
 import show_crud.models.Show;
 
 import java.util.List;

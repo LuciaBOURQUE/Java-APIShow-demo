@@ -8,9 +8,6 @@ public class Show {
     private String place;
     private String hour;
 
-    public Show() {
-    }
-
     public Show(String title, String date, String place, String hour) {
         this.title = title;
         this.date = date;
@@ -69,5 +66,3 @@ public class Show {
                 '}';
     }
 }
-
-//", date=" + getFormattedDate() +

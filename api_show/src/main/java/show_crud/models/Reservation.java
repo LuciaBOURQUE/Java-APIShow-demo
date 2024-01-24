@@ -7,9 +7,6 @@ public class Reservation {
     private Integer choiceShow;
     private boolean reserved;
 
-    public Reservation() {
-    }
-
     public Reservation(String pseudo, boolean reserved) {
         this.pseudo = pseudo;
         this.reserved = reserved;

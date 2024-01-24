@@ -1,4 +1,4 @@
-package show_crud.dao;
+package show_crud.services;
 
 import show_crud.models.Reservation;
 
