@@ -49,3 +49,13 @@ public class TicketsAPI {
         return ReservationsDAO.getSingleton().getById(showId);
     }*/
 }
+
+/*
+Tests Postman avec création de données Show :
+{
+    "title": "Louise Attaque",
+    "date": "2024-05-12",
+    "place" : "Stade Beaublanc",
+    "hour" : "21:00"
+}
+ */

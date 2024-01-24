@@ -4,11 +4,15 @@ public class Reservation {
     private Integer id;
 
     private String pseudo;
-    private Integer choiceShow;
+    private Integer reserveShowId;
     private boolean reserved;
 
-    public Reservation(String pseudo, boolean reserved) {
+    public Reservation() {
+    }
+
+    public Reservation(String pseudo, Integer reserveShowId, boolean reserved) {
         this.pseudo = pseudo;
+        this.reserveShowId = reserveShowId;
         this.reserved = reserved;
     }
 
@@ -20,12 +24,12 @@ public class Reservation {
         this.id = id;
     }
 
-    public Integer getChoiceShow() {
-        return choiceShow;
+    public Integer getReserveShowId() {
+        return reserveShowId;
     }
 
-    public void setChoiceShow(Integer choiceShow) {
-        this.choiceShow = choiceShow;
+    public void setReserveShowId(Integer reserveShowId) {
+        this.reserveShowId = reserveShowId;
     }
 
     public String getPseudo() {
@@ -49,7 +53,7 @@ public class Reservation {
         return "Person{" +
                 "id=" + id +
                 ", pseudo='" + pseudo + '\'' +
-                ", choiceShow=" + choiceShow +
+                ", reserveShowId=" + reserveShowId +
                 ", reserved=" + reserved +
                 '}';
     }

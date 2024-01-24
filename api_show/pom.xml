@@ -7,7 +7,7 @@
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
 
-  <name>APIShow</name>
+  <name>api_show</name>
   <description>
     JakartaEE 10 + Jersey for WS REST
     Deploy on Tomcat 10
@@ -22,13 +22,6 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-
     <dependency>
       <groupId>jakarta.platform</groupId>
       <artifactId>jakarta.jakartaee-core-api</artifactId>
@@ -105,12 +98,6 @@
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>42.5.4</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-      <version>2.12.0</version> <!-- Mettez à jour la version en fonction de la dernière version disponible -->
     </dependency>
   </dependencies>
 

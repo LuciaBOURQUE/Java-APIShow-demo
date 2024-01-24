@@ -1,7 +1,6 @@
 package show_crud.services;
 
 import show_crud.models.Reservation;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,7 @@ public class ReservationsDAO {
      */
     private static ReservationsDAO singleton;
     private ReservationsDAO() {}
-    public static TicketsDAO getSingleton() {
+    public static ReservationsDAO getSingleton() {
         if (singleton == null)
             singleton = new ReservationsDAO();
         return singleton;
@@ -55,7 +54,7 @@ public class ReservationsDAO {
     public List<Reservation> getByShowId(Integer showId){
         ArrayList<Reservation> resultat = new ArrayList<>();
         for (Reservation r : reservations.values()){
-            if(r.getChoiceShow().equals(showId))
+            if(r.getReserveShowId().equals(showId))
                 resultat.add(r);
         }
         return resultat;
