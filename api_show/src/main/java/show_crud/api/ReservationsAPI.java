@@ -1,29 +1,34 @@
-package ws_crud;
+package show_crud.api;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import show_crud.dao.ReservationsDAO;
+import show_crud.dao.TicketsDAO;
+import show_crud.models.Reservation;
+import show_crud.models.Show;
+
 import java.util.List;
 
 @Path("/reservations")
 public class ReservationsAPI {
     // On récupère ici la Class Réservations pour la portée de variable
-    private static ReservationsOffice reservations = new ReservationsOffice();
-    private static TicketsOffice tickets = new TicketsOffice();
+    private static ReservationsDAO reservations = new ReservationsDAO();
+    private static TicketsDAO tickets = new TicketsDAO();
 
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Person> getReservation() {
+    public List<Reservation> getReservation() {
         return reservations.getList();
     }
 
     @GET
     @Path("/{id}/validate")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getReservationValidate(@PathParam("id") Integer id, Person person) {
+    public Response getReservationValidate(@PathParam("id") Integer id, Reservation reservation) {
         Show show = tickets.getShow(id);
-        if (id.equals(show) && reservations.isReserved(person))
+        if (id.equals(show) && reservations.isReserved(reservation))
             reservations.getList();
         return Response.ok().build();
     }
@@ -31,9 +36,9 @@ public class ReservationsAPI {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addReservation(Person newPerson) {
+    public Response addReservation(Reservation newReservation) {
         //newPerson.getChoiceShow() == null &&
-        if (newPerson.getPseudo().isBlank()) {
+        if (newReservation.getPseudo().isBlank()) {
             // Retourner BAD REQUEST 400
             return Response
                     .status(Response.Status.BAD_REQUEST)
@@ -41,10 +46,10 @@ public class ReservationsAPI {
         }
 
         // Retourner 201 OK
-        reservations.addReservation(newPerson);
+        reservations.addReservation(newReservation);
         return Response
                 .status(Response.Status.CREATED)
-                .entity(newPerson).build();
+                .entity(newReservation).build();
     }
 
     @DELETE
@@ -56,15 +61,15 @@ public class ReservationsAPI {
 
     @PUT
     @Path("/{id}")
-    public Response updateReservation(@PathParam("id") Integer id, Person person) {
-        if (id.equals(person.getId())) {
+    public Response updateReservation(@PathParam("id") Integer id, Reservation reservation) {
+        if (id.equals(reservation.getId())) {
             // Retourner 400 BAD REQUEST
             return Response
                     .status(Response.Status.BAD_REQUEST)
                     .entity("ID différent").build();
         } else {
             // Retourner 404 NOT FOUND
-            Person p = reservations.getReservation(id);
+            Reservation p = reservations.getReservation(id);
             if (p == null) {
                 return Response
                         .status(Response.Status.NOT_FOUND)
@@ -73,7 +78,7 @@ public class ReservationsAPI {
         }
 
         // Retourner OK
-        reservations.updateReservation(id, person);
+        reservations.updateReservation(id, reservation);
         return Response.ok().build();
     }
 }

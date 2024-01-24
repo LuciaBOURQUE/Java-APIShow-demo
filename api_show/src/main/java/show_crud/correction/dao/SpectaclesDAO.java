@@ -1,6 +1,6 @@
-package ws_crud.correction.dao;
+package show_crud.correction.dao;
 
-import ws_crud.correction.Spectacle;
+import show_crud.correction.Spectacle;
 import java.util.HashMap;
 import java.util.List;
 

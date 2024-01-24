@@ -1,12 +1,12 @@
-package ws_crud.correction.api;
+package show_crud.correction.api;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import ws_crud.correction.Reservation;
-import ws_crud.correction.Spectacle;
-import ws_crud.correction.dao.ReservationsDAO;
-import ws_crud.correction.dao.SpectaclesDAO;
+import show_crud.correction.Reservation;
+import show_crud.correction.Spectacle;
+import show_crud.correction.dao.ReservationsDAO;
+import show_crud.correction.dao.SpectaclesDAO;
 
 import java.util.List;
 

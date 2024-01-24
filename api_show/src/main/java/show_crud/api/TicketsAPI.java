@@ -1,8 +1,10 @@
-package ws_crud;
+package show_crud.api;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import show_crud.dao.TicketsDAO;
+import show_crud.models.Show;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
 public class TicketsAPI {
     // On aurait très bien pu mettre notre Singleton dans notre Class ZooTiger
     // On récupère ici la Class Tickets pour la portée de variable
-    private static TicketsOffice tickets = new TicketsOffice();
+    private static TicketsDAO tickets = new TicketsDAO();
 
     @GET
     @Produces (MediaType.APPLICATION_JSON)

@@ -1,13 +1,9 @@
-package ws_crud;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+package show_crud.models;
 
 public class Show {
     private Integer id;
-    private String name;
-    //private LocalDate date;
+
+    private String title;
     private String date;
     private String place;
     private String hour;
@@ -15,8 +11,8 @@ public class Show {
     public Show() {
     }
 
-    public Show(String name, String date, String place, String hour) {
-        this.name = name;
+    public Show(String title, String date, String place, String hour) {
+        this.title = title;
         this.date = date;
         this.place = place;
         this.hour = hour;
@@ -30,12 +26,12 @@ public class Show {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDate() {
@@ -62,18 +58,11 @@ public class Show {
         this.hour = hour;
     }
 
-    // Formater la date
-    /*
-    public String getFormattedDate() {
-        // Utilisez la méthode format de DateLocal ou LocalDate pour formater la date
-        return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
-    }*/
-
     @Override
     public String toString() {
         return "Show{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + title + '\'' +
                 ", date=" + date + '\'' +
                 ", place='" + place + '\'' +
                 ", hour='" + hour + '\'' +

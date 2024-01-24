@@ -1,4 +1,4 @@
-package ws_crud.correction;
+package show_crud.correction;
 
 public class Reservation {
     private Integer id;

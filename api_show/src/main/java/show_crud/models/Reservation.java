@@ -1,15 +1,16 @@
-package ws_crud;
+package show_crud.models;
 
-public class Person {
+public class Reservation {
     private Integer id;
+
     private String pseudo;
     private Integer choiceShow;
     private boolean reserved;
 
-    public Person() {
+    public Reservation() {
     }
 
-    public Person(String pseudo, boolean reserved) {
+    public Reservation(String pseudo, boolean reserved) {
         this.pseudo = pseudo;
         this.reserved = reserved;
     }
