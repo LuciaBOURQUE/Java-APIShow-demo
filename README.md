@@ -68,7 +68,7 @@ To contribute:
 
 ## Authors
 
-Your Name Lucia Bourque
+Lucia Bourque
 
 ## License
 
