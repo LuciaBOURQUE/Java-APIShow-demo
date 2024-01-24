@@ -5,7 +5,7 @@ public class Reservation {
 
     private String pseudo;
     private Integer reserveShowId;
-    private boolean reserved;
+    private boolean reserved; // false
 
     public Reservation() {
     }

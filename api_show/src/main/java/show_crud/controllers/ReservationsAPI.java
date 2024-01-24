@@ -8,6 +8,7 @@ import show_crud.models.Reservation;
 import show_crud.models.Show;
 import show_crud.services.TicketsDAO;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,6 +23,21 @@ public class ReservationsAPI {
             error.printStackTrace();
             return Collections.emptyList();
         }
+    }
+
+    @GET
+    @Path("/validated/{showId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Reservation> getAllValidateReservation(@PathParam("showId") Integer showId) {
+        List<Reservation> reservations = ReservationsDAO.getSingleton().getList();
+        List<Reservation> validateReservation = new ArrayList<>();
+
+        for (Reservation r:reservations){
+            if(r.isReserved() && r.getReserveShowId().equals(showId)){
+                validateReservation.add(r);
+            }
+        }
+        return validateReservation;
     }
 
     @POST
@@ -43,7 +59,6 @@ public class ReservationsAPI {
             }
         }
 
-        // Retourner OK 201
         ReservationsDAO.getSingleton().addReservation(newReservation);
         return Response
                 .status(Response.Status.CREATED) // 201
@@ -52,65 +67,40 @@ public class ReservationsAPI {
 
     @DELETE
     @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteReservation(@PathParam("id") Integer id) {
+        Reservation reservation = ReservationsDAO.getSingleton().getReservation(id);
+        if (reservation.isReserved()) {
+            return Response
+                    .status(Response.Status.FORBIDDEN) // 403
+                    .entity("Trop tard, c'est confirmé, vous ne pouvez plus supprimé")
+                    .build();
+        }
+
         ReservationsDAO.getSingleton().deleteReservation(id);
         return Response
                 .noContent().build(); // send a 204 Status : No Content
-    }
-
-    @PUT
-    @Path("/{id}")
-    public Response updateReservation(@PathParam("id") Integer id, Reservation reservation) {
-        if (id.equals(reservation.getId())) {
-            return Response
-                    .status(Response.Status.BAD_REQUEST)
-                    .entity("ID différent").build();
-        } else {
-            Reservation p = ReservationsDAO.getSingleton().getReservation(id);
-            if (p == null) {
-                return Response
-                        .status(Response.Status.NOT_FOUND)
-                        .entity("ID inexistant").build();
-            }
-        }
-
-        ReservationsDAO.getSingleton().updateReservation(id, reservation);
-        return Response.ok().build();
     }
 }
 
 /*
 Tests Postman avec création de données Reservation :
 {
-    "pseudo": "bibi",
+    "pseudo": "bibi-du-75",
     "reserveShowId": 1,
-    "reserved" : false
-}
-
-{
-    "pseudo": "arthur_2548B",
-    "reserveShowId": 1,
-    "reserved": true
+    "reserved" : true
 }
 
 {
     "pseudo": "arthur_2548B",
     "reserveShowId": 2,
+    "reserved": false
+}
+
+{
+    "pseudo": "arthur_2548B",
+    "reserveShowId": 1,
     "reserved": true
 }
  */
-
-
-
-
-
-/*
-@GET
-@Path("/{id}/validate")
-@Produces(MediaType.APPLICATION_JSON)
-public Response getReservationValidate(@PathParam("id") Integer id, Reservation reservation) {
-    Show show = tickets.getShow(id);
-    if (id.equals(show) && reservations.isReserved(reservation))
-        reservations.getList();
-    return Response.ok().build();
-}*/
