@@ -10,9 +10,10 @@ public class TicketsDAO {
      * instance of TicketsDAO in the application.
      */
     private static TicketsDAO singleton;
-    private TicketsDAO(){}
+    private TicketsDAO() {
+    }
     public static TicketsDAO getSingleton() {
-        if(singleton == null)
+        if (singleton == null)
             singleton = new TicketsDAO();
         return singleton;
     }
@@ -39,7 +40,7 @@ public class TicketsDAO {
         shows.put(idCount, newShow);
     }
 
-    public Show getById(Integer showId){
+    public Show getById(Integer showId) {
         return shows.get(showId);
     }
 }
