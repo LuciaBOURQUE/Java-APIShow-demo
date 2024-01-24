@@ -2,37 +2,62 @@ package show_crud.services;
 
 import show_crud.models.Reservation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class ReservationsDAO {
-    private int idCount = 0;
-    private HashMap<Integer, Reservation> persons = new HashMap<>();
-
-    public List<Reservation> getList() {
-        return persons.values().stream().toList();
+    /**
+     * Singleton pattern is used to ensure that there is only one
+     * instance of ReservationsDAO in the application.
+     */
+    private static ReservationsDAO singleton;
+    private ReservationsDAO() {}
+    public static TicketsDAO getSingleton() {
+        if (singleton == null)
+            singleton = new ReservationsDAO();
+        return singleton;
     }
 
-    public Reservation getReservation(int id) {
-        return persons.get(id);
+    /**
+     * Counter for generating unique identifiers for shows.
+     * Storage for shows. Key: showId, Value: Show object.
+     */
+    private int idCount = 0;
+    private HashMap<Integer, Reservation> reservations = new HashMap<>();
+
+    /**
+     * Retrieves a list of all shows.
+     * @return List of Show objects.
+     */
+    public List<Reservation> getList() {
+        return reservations.values().stream().toList();
     }
 
     public void addReservation(Reservation newReservation) {
         idCount++;
         newReservation.setId(idCount);
-        persons.put(idCount, newReservation);
+        reservations.put(idCount, newReservation);
     }
 
-    public void deleteReservation(int id){
-        persons.remove(id);
+    public Reservation getReservation(Integer id) {
+        return reservations.get(id);
     }
 
-    public void updateReservation(int id, Reservation reservation){
-        persons.replace(id, reservation);
+    public void deleteReservation(Integer id){
+        reservations.remove(id);
     }
 
-    public boolean isReserved(Reservation reservation){
-        reservation.setReserved(true);
-        return true;
+    public void updateReservation(Integer id, Reservation reservation){
+        reservations.replace(id, reservation);
+    }
+
+    public List<Reservation> getByShowId(Integer showId){
+        ArrayList<Reservation> resultat = new ArrayList<>();
+        for (Reservation r : reservations.values()){
+            if(r.getChoiceShow().equals(showId))
+                resultat.add(r);
+        }
+        return resultat;
     }
 }

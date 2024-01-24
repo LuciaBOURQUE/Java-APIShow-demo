@@ -10,8 +10,7 @@ public class TicketsDAO {
      * instance of TicketsDAO in the application.
      */
     private static TicketsDAO singleton;
-    private TicketsDAO() {
-    }
+    private TicketsDAO() {}
     public static TicketsDAO getSingleton() {
         if (singleton == null)
             singleton = new TicketsDAO();
